@@ -2,17 +2,31 @@ name: Add bugs to bugs project
 
 on:
   issues:
-    types:
-      - opened
+    types: [opened, labeled]
 
 jobs:
   add-to-project:
     name: Add issue to project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/add-to-project@main
+      - name: Add issue to patch project
+        uses: actions/add-to-project@main
         with:
           project-url: https://github.com/users/tgtshanika/projects/2/
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
-          labeled: bug, needs-triage
+          labeled: Patch, Type/Patch
           label-operator: OR
+      - name: Add issue to APIM Internals
+        uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/users/tgtshanika/projects/2/
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: product/apim, Type/Internal
+          label-operator: AND          
+      - name: Add issue to EI Internals
+        uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/users/tgtshanika/projects/2/
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: product/ei, Type/Internal
+          label-operator: AND    
