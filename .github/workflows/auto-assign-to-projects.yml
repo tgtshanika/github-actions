@@ -21,12 +21,6 @@ jobs:
         with:
           project-url: https://github.com/users/tgtshanika/projects/4/
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
-          labeled: product/apim, Type/Internal
+          labeled: Type/Internal
           label-operator: AND          
-      - name: Add issue to EI Internals
-        uses: actions/add-to-project@main
-        with:
-          project-url: https://github.com/users/tgtshanika/projects/4/
-          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
-          labeled: product/ei, Type/Internal
-          label-operator: AND    
+   
