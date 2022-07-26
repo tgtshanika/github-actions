@@ -27,6 +27,6 @@ jobs:
             
             for (const issue of issues) {
 
-             console.log((issue.number)
+             console.log(issue.number)
             }
 
