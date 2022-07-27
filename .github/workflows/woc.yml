@@ -7,8 +7,9 @@ jobs:
     permissions:
       issues: write
     if:
-      ${{!(
-      contains(github.event.issue.labels.*.name, 'Resolution/Merged to Public') ||
+      ${{ contains(github.event.issue.labels.*.name, 'Type/Patch') && 
+      !(
+      contains(github.event.issue.labels.*.name, 'Resolution/Public Fix Merged') ||
       contains(github.event.issue.labels.*.name, 'Resolution/Public Fix N/A')
       )}}
     steps:
