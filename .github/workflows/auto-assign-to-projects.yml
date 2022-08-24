@@ -21,6 +21,6 @@ jobs:
         with:
           project-url: https://github.com/users/tgtshanika/projects/4/
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
-          labeled: Type/Internal
-          label-operator: AND          
+          labeled: Type/Patch
+          label-operator: NOT          
    
