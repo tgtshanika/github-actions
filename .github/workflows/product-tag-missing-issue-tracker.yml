@@ -15,7 +15,7 @@ jobs:
       contains(github.event.issue.labels.*.name, 'product/mi')
       )}}
     steps:
-      - run: gh issue comment $ISSUE --body "This issue is **NOT** created with a **product/* ** label. Please add one of following labels to specify the product.<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- **product/apim** - The issue is related to API Manager, API Manager Analytics, API Micro Gateway.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- **product/ei** -  The issue is related to Enterprise Integrator, Micro Integrator, Dev Studio, Streaming Integrator<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- **product/choreo-connect** - The issue is related to Choreo Connect<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+      - run: gh issue comment $ISSUE --body "This issue is **NOT** created with a **product/ ** label. Please add one of following labels to specify the product.<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- **product/apim** - The issue is related to API Manager, API Manager Analytics, API Micro Gateway.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- **product/ei** -  The issue is related to Enterprise Integrator, Micro Integrator, Dev Studio, Streaming Integrator<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- **product/choreo-connect** - The issue is related to Choreo Connect<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
       - run: gh issue reopen $ISSUE
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
