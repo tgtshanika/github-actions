@@ -8,9 +8,12 @@ jobs:
     permissions:
       issues: write
     if:
-      ${{
-      !contains(github.event.issue.labels.*.name, 'product/apim')
-      }}
+      ${{ !contains(github.event.issue.labels.*.name, 'Type/Patch') && 
+      !(
+      contains(github.event.issue.labels.*.name, 'product/apim') ||
+      contains(github.event.issue.labels.*.name, 'product/ei') ||
+      contains(github.event.issue.labels.*.name, 'product/mi')
+      )}}
     steps:
       - run: gh issue comment $ISSUE --body "This issue is **NOT** created with a **product/** label. Make sure to add the required label which specifies the product. Please add one of following product labels.<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- **product/apim** - The issue is related to API Manager, API Manager Analytics, API Micro Gateway.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- **product/ei** -  The issue is related to Enterprise Integrator, Micro Integrator, Dev Studio, Streaming Integrator<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- **product/choreo-connect** - The issue is related to Choreo Connect<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
       - run: gh issue reopen $ISSUE
