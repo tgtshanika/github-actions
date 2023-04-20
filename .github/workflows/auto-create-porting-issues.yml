@@ -16,17 +16,27 @@ jobs:
           script: |
             const { owner, repo } = context.repo;
             const { number, title } = context.issue;
+
+            if (!title) {
+              console.error('Issue title is undefined');
+              return;
+            }
+
             const issueBody = `
               This issue was automatically created to track the porting of ${title}.
               Original issue: #${number}
             `;
+
+            console.log(`Creating porting issue for ${title}`);
+
             const issueData = {
               title: `Porting issue for ${title}`,
               body: issueBody,
               labels: ['porting'],
             };
-            await github.issues.create({
+            const newIssue = await github.issues.create({
               owner,
               repo,
               ...issueData
             });
+            console.log(`Created porting issue ${newIssue.data.number}`);
