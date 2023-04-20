@@ -17,8 +17,8 @@ jobs:
           
             const { owner, repo } = context.repo;
             const { number, title } = context.payload.issue;
-            console.log(number);
-            console.log(title);
+            console.log(owner);
+            console.log(repo);
             const label = context.payload.label.name;
             
             let newIssueLabels = ['Type/Patch'];
@@ -33,7 +33,7 @@ jobs:
             const issueData = {
               title: `[ForwardPort-${newIssueVersion}] Porting issue for ${title}`,
               body: issueBody,
-              labels: [...newIssueLabels],
+              labels: ['bug'],
             };
             console.log(newIssueVersion);
             await github.issues.create({
