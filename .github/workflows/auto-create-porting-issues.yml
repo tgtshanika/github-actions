@@ -10,34 +10,21 @@ jobs:
     if: ${{ github.event.label.name == 'port' }}
     steps:
       - name: Create porting issue
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            
             const { owner, repo } = context.repo;
-            const response = await github.rest.issues.get({
+            const { number, title } = context.issue;
+            if (!title) {
+              console.error('Issue title is undefined');
+              console.error(context.issue.title);
+              console.error(context.issue);
+              const response = await github.rest.issues.get({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo
-            });
-            console.log(response);
-
-            const issueBody = `
-              This issue was automatically created to track the porting of 2 .
-              Original issue: #${number}
-            `;
-
-            console.log(`Creating porting issue for 2`);
-
-            const issueData = {
-              title: `Porting issue for ${title}`,
-              body: issueBody,
-              labels: ['porting'],
-            };
-            const newIssue = await github.issues.create({
-              owner,
-              repo,
-              ...issueData
-            });
-            console.log(`Created porting issue ${newIssue.data.number}`);
+              });
+              console.error(response);
+              return;
+            }
