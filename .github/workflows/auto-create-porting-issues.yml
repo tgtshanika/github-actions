@@ -15,16 +15,10 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { owner, repo } = context.repo;
-            const { number, title } = context.issue;
-            const response = await github.rest.issues.get({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo
-              });
-            const issue_title = response.data.title;
+            const { number } = context.issue;
+            const issue_title = context.payload.issue.title;
             const issueBody = `
               This issue was automatically created to track forward porting of ${issue_title}.
-
               Original issue: #${number}
             `;
             const issueData = {
@@ -32,10 +26,8 @@ jobs:
               body: issueBody,
               labels: ['porting'],
             };
-            await github.issues.create({
+            await github.rest.issues.create({
               owner,
               repo,
               ...issueData
             });
-
-            
