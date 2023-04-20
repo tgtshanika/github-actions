@@ -18,7 +18,7 @@ jobs:
             const { number } = context.issue;
             const issue_title = context.payload.issue.title;
          
-            let label = github.event.label.name;
+            const { label } = github.event.label;
                console.log("-----Reading Label2-----");
             let newIssueLabels = ['Type/Patch'];
             let newIssueVersion = label.split('-')[1];
