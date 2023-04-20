@@ -30,10 +30,11 @@ jobs:
               Original issue: #${number}
               Product Version : ${newIssueVersion}
             `;
+
             const issueData = {
-              title: `[ForwardPort-${newIssueVersion}] Porting issue for ${title}`,
+              title: `Porting issue for ${issue_title}`,
               body: issueBody,
-              labels: ['bug'],
+              labels: ['porting'],
             };
             console.log(newIssueVersion);
             await github.issues.create({
