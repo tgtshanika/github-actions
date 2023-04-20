@@ -16,7 +16,7 @@ jobs:
           script: |
             const { owner, repo } = context.repo;
             const { number } = context.issue;
-            const { title } = context.payload.issue.title;
+            const { title } = context.issue.title;
             const issueBody = `
               This issue was automatically created to track the porting of ${title}.
 
