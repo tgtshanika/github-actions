@@ -17,7 +17,7 @@ jobs:
             const { owner, repo } = context.repo;
             const { number, title } = context.issue;
             
-            //const issue_title = context.payload.issue.title;
+      
             console.log(github.event);
          
             const label = github.context.payload.label.name;
