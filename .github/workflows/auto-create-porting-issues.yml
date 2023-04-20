@@ -16,11 +16,14 @@ jobs:
           script: |
             const { owner, repo } = context.repo;
             const { number, title } = context.issue;
-
-            if (!title) {
-              console.error('Issue title is undefined');
-              return;
-            }
+            
+            const { data } = await github.rest.issues.get({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo
+            });            
+            
+            const { title } = ${data.items[0].title};
 
             const issueBody = `
               This issue was automatically created to track the porting of ${title}.
