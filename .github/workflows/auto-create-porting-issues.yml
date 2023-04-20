@@ -17,7 +17,8 @@ jobs:
           
             const { owner, repo } = context.repo;
             const { number, title } = context.payload.issue;
-         
+            console.log(number);
+            console.log(title);
             const label = context.payload.label.name;
             
             let newIssueLabels = ['Type/Patch'];
@@ -34,6 +35,7 @@ jobs:
               body: issueBody,
               labels: newIssueLabels,
             };
+            console.log(
             await github.issues.create({
               owner,
               repo,
