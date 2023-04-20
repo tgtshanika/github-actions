@@ -16,9 +16,9 @@ jobs:
           script: |
           
             const { owner, repo } = context.repo;
-            const { number, title } = context.issue;
+            const { number, title } = context.payload.issue;
          
-            const label = context.label.name;
+            const label = context.payload.label.name;
             
             let newIssueLabels = ['Type/Patch'];
             let newIssueVersion = label.split('-')[1];
