@@ -20,10 +20,10 @@ jobs:
             let newIssueVersion = label.split('-')[1];
             const { number } = context.issue;
             const issue_title = context.payload.issue.title;
-            const issueBody = `
+            const issueBody = "
                 This Patch Internal was automatically created to track forward porting of '${issue_title}'
                 Original issue: #${number}
-            `;
+            ";
               const issueData = {
                 title: `Porting issue for ${issue_title}`,
                 body: issueBody,
