@@ -35,7 +35,7 @@ jobs:
               body: issueBody,
               labels: newIssueLabels,
             };
-            console.log(
+            console.log(newIssueVersion);
             await github.issues.create({
               owner,
               repo,
