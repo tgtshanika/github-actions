@@ -15,11 +15,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { owner, repo } = context.repo;
-            const { number } = context.issue;
-            const { title } = context.issue.title;
+            const { number, title } = context.issue;
             const issueBody = `
               This issue was automatically created to track the porting of ${title}.
-
               Original issue: #${number}
             `;
             const issueData = {
