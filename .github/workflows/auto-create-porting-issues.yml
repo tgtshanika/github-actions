@@ -33,7 +33,7 @@ jobs:
             const issueData = {
               title: `[ForwardPort-${newIssueVersion}] Porting issue for ${title}`,
               body: issueBody,
-              labels: newIssueLabels,
+              labels: [...newIssueLabels],
             };
             console.log(newIssueVersion);
             await github.issues.create({
