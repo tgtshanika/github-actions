@@ -26,9 +26,8 @@ jobs:
             newIssueLabels.push(label.split('/')[1]);
             
             const issueBody = `
-              This Patch Internal was automatically created to track forward porting of *${title}*.
+              This Patch Internal was automatically created to track forward porting of ${title}.
               Original issue: #${number}
-              Product Version : ${newIssueVersion}
             `;
 
             const issueData = {
