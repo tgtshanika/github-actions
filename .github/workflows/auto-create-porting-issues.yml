@@ -23,8 +23,6 @@ jobs:
             
             let newIssueLabels = ['Type/Patch'];
             let newIssueVersion = label.split('-')[1];
-            newIssueLabels.push(label.split('/')[1]);
-            console.log(newIssueLabels);
             
             const issue_title = context.payload.issue.title;
             const issueBody = `
