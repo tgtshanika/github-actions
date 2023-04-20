@@ -9,14 +9,25 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.label.name == 'port' }}
     steps:
-    - name: Create porting issue
-      uses: peter-evans/create-issue-from-file@v2
-      with:
-        title: 'Porting issue for ${github.event.issue.title}'
-        body: |
-          This issue was automatically created to track the porting of ${github.event.issue.title}.
+      - name: Create porting issue
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo } = context.repo;
+            const { title, number } = context.issue;
+            const issueBody = `
+              This issue was automatically created to track the porting of ${title}.
 
-          Original issue: ${github.event.issue.html_url}
-        assignees: ''
-        labels: 'porting'       
-   
+              Original issue: #${number}
+            `;
+            const issueData = {
+              title: `Porting issue for ${title}`,
+              body: issueBody,
+              labels: ['porting'],
+            };
+            await github.issues.create({
+              owner,
+              repo,
+              ...issueData
+            });
