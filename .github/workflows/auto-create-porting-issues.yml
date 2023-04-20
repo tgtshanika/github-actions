@@ -17,11 +17,6 @@ jobs:
           
             const { owner, repo } = context.repo;
             const { number, title } = context.issue;
-            
-            if (!github.event.label) {
-              console.log('Label not found in event');
-              return;
-            }
          
             const label = context.label.name;
             
