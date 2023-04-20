@@ -16,28 +16,21 @@ jobs:
           script: |
           
             const { owner, repo } = context.repo;
-            const { number, title } = context.payload.issue;
-            console.log(owner);
-            console.log(repo);
-            const label = context.payload.label.name;
-            
-            let newIssueLabels = ['Type/Patch'];
-            let newIssueVersion = label.split('-')[1];
-            
-            const issue_title = context.payload.issue.title;
-            const issueBody = `
-              This issue was automatically created to track forward porting of ${issue_title}.
-              Original issue: #${number}
-            `;
-            const issueData = {
-              title: `Porting issue for ${issue_title}`,
-              body: issueBody,
-              labels: ['porting'],
-            };
-            await github.rest.issues.create({
-              owner,
-              repo,
-              ...issueData
-            });
+            const { number } = context.issue;
+              const issue_title = context.payload.issue.title;
+              const issueBody = `
+                This issue was automatically created to track forward porting of ${issue_title}.
+                Original issue: #${number}
+              `;
+              const issueData = {
+                title: `Porting issue for ${issue_title}`,
+                body: issueBody,
+                labels: ['porting'],
+              };
+              await github.rest.issues.create({
+                owner,
+                repo,
+                ...issueData
+              });
             
 
