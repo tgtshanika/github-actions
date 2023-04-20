@@ -15,7 +15,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
           
-            console.log(context);
             const { owner, repo } = context.repo;
             const { number, title } = context.issue;
             
@@ -24,7 +23,7 @@ jobs:
               return;
             }
          
-            const label = github.event.label.name;
+            const label = context.label.name;
             
             let newIssueLabels = ['Type/Patch'];
             let newIssueVersion = label.split('-')[1];
