@@ -22,15 +22,13 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo
             });            
-            
-            const { title } = ${data.items[0].title};
 
             const issueBody = `
-              This issue was automatically created to track the porting of ${title}.
+              This issue was automatically created to track the porting of ${data.items[0].title}.
               Original issue: #${number}
             `;
 
-            console.log(`Creating porting issue for ${title}`);
+            console.log(`Creating porting issue for ${data.items[0].title}`);
 
             const issueData = {
               title: `Porting issue for ${title}`,
