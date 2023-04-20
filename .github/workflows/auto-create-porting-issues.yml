@@ -1,29 +1,30 @@
 name: Create porting issues
-
-on:
+'on':
   issues:
-    types: [labeled]
-
+    types:
+      - labeled
 jobs:
   create_issue:
     runs-on: ubuntu-latest
-    if: ${{ github.event.label.name == 'Pending/ForwardPort-4.2.0' || github.event.label.name == 'Pending/ForwardPort-4.1.0' }}
+    if: >-
+      ${{ github.event.label.name == 'Pending/ForwardPort-4.2.0' ||
+      github.event.label.name == 'Pending/ForwardPort-4.1.0' }}
     steps:
       - name: Create porting issue
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
           script: |
-          
+
             const { owner, repo } = context.repo;
             let label = context.payload.label.name;
             let newIssueVersion = label.split('-')[1];
             const { number } = context.issue;
             const issue_title = context.payload.issue.title;
-            const issueBody = "
+            const issueBody = `
                 This Patch Internal was automatically created to track forward porting of '${issue_title}'
                 Original issue: #${number}
-            ";
+            `;
               const issueData = {
                 title: `Porting issue for ${issue_title}`,
                 body: issueBody,
@@ -34,5 +35,3 @@ jobs:
                 repo,
                 ...issueData
               });
-            
-
