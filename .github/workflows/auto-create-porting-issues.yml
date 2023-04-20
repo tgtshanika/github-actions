@@ -25,6 +25,6 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo
               });
-              console.error(response);
+              console.error(response.data.title);
               return;
             }
