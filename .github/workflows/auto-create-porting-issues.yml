@@ -32,7 +32,7 @@ jobs:
             `;
 
             const issueData = {
-              title: `Porting issue for ${issue_title}`,
+              title: `Porting issue for ${title}`,
               body: issueBody,
               labels: ['porting'],
             };
