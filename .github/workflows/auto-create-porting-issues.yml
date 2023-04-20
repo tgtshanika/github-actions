@@ -14,21 +14,21 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { owner, repo } = context.repo;
-            const { number } = context.issue;
             
-            const { data } = await github.rest.issues.get({
+            const { owner, repo } = context.repo;
+            const response = await github.rest.issues.get({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo
-            });            
+            });
+            console.log(response);
 
             const issueBody = `
-              This issue was automatically created to track the porting of ${data.items[0].title}.
+              This issue was automatically created to track the porting of 2 .
               Original issue: #${number}
             `;
 
-            console.log(`Creating porting issue for ${data.items[0].title}`);
+            console.log(`Creating porting issue for 2`);
 
             const issueData = {
               title: `Porting issue for ${title}`,
