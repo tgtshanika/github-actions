@@ -17,10 +17,11 @@ jobs:
             const { owner, repo } = context.repo;
             const { number, title } = context.issue;
          
-            const { label } = github.event;
+            let label = github.context.payload.label.name;
+            console.log(label);
             let newIssueLabels = ['Type/Patch'];
-            let newIssueVersion = label.name.split('-')[1];
-            newIssueLabels.push(label.name.split('/')[1]);
+            let newIssueVersion = label.split('-')[1];
+            newIssueLabels.push(label.split('/')[1]);
             
             const issueBody = `
               This Patch Internal was automatically created to track forward porting of *${title}*.
