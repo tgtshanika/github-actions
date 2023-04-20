@@ -1,0 +1,22 @@
+name: Add bugs to bugs project
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  create_issue:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.label.name == 'port' }}
+    steps:
+    - name: Create porting issue
+      uses: peter-evans/create-issue-from-file@v2
+      with:
+        title: 'Porting issue for ${github.event.issue.title}'
+        body: |
+          This issue was automatically created to track the porting of ${github.event.issue.title}.
+
+          Original issue: ${github.event.issue.html_url}
+        assignees: ''
+        labels: 'porting'       
+   
