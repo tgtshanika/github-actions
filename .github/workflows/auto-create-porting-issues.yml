@@ -18,16 +18,17 @@ jobs:
 
             const { owner, repo } = context.repo;
             let label = context.payload.label.name;
-            let newIssueVersion = label.split('-')[1];
+            let port_label = label.split('/')[1];
+            let version = label.split('-')[1];
             const { number } = context.issue;
             const issue_title = context.payload.issue.title;
             const issueBody = `This Patch Internal was automatically created to track forward porting of ${issue_title}.
                 Original issue: #${number}`;
                 
             const issueData = {
-                title: `Porting issue for ${issue_title}`,
+                title: `[ForwardPort][$version]${issue_title}`,
                 body: issueBody,
-                labels: ['porting'],
+                labels: ['Type/Patch','$port_label'],
             };
             await github.rest.issues.create({
                 owner,
