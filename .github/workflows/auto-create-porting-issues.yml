@@ -26,9 +26,9 @@ jobs:
                 Original issue: #${number}`;
                 
             const issueData = {
-                title: `[ForwardPort][$version]${issue_title}`,
+                title: `[ForwardPort][${version}]${issue_title}`,
                 body: issueBody,
-                labels: ['Type/Patch','$port_label'],
+                labels: ['Type/Patch','${port_label}'],
             };
             await github.rest.issues.create({
                 owner,
