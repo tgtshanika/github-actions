@@ -22,7 +22,6 @@ jobs:
             let version = label.split('-')[1];
             const { number } = context.issue;
             const issue_title = context.payload.issue.title;
-            console.log(context.payload.issue);
             const issueBody = `This Patch Internal was automatically created to track forward porting of ${issue_title}.
                 Original issue: #${number}`;
                 
@@ -31,6 +30,13 @@ jobs:
                 body: issueBody,
                 labels: ['Type/Patch', port_label],
             };
+            let labels = context.payload.issue.labels;
+            if(labels.some(label => label.name === 'product/apim')){
+               issueData.labels.push('product/apim');
+            } else if (labels.some(label => label.name === 'product/ei')){
+               issueData.labels.push('product/ei');
+            }
+            
             await github.rest.issues.create({
                 owner,
                 repo,
