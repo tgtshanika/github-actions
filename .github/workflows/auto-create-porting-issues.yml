@@ -22,6 +22,7 @@ jobs:
             let version = label.split('-')[1];
             const { number } = context.issue;
             const issue_title = context.payload.issue.title;
+            console.log(context.payload.issue);
             const issueBody = `This Patch Internal was automatically created to track forward porting of ${issue_title}.
                 Original issue: #${number}`;
                 
