@@ -21,13 +21,9 @@ jobs:
             let port_label = label.split('/')[1];
             let version = label.split('-')[1];
             const { number } = context.issue;
-            const issue_title = context.payload.issue.title;
-            const issueBody = `This Patch Internal was automatically created to track forward porting of ${issue_title}.
-                Original issue: #${number}`;
-                
+            const issue_title = context.payload.issue.title;                
             const issueData = {
                 title: `[ForwardPort][${version}]${issue_title}`,
-                body: issueBody,
                 labels: ['Type/Patch', port_label],
             };
             let labels = context.payload.issue.labels;
@@ -41,6 +37,7 @@ jobs:
             const issueBody = `This Patch Internal was automatically created to track forward porting of ${issue_title}.
                 Original issue: #${number}
                 Product: ${product}`;
+            issueData.body = issueBody;
             
             await github.rest.issues.create({
                 owner,
