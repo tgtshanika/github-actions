@@ -31,11 +31,16 @@ jobs:
                 labels: ['Type/Patch', port_label],
             };
             let labels = context.payload.issue.labels;
+            let product = `Product/`;
             if(labels.some(label => label.name === 'product/apim')){
                issueData.labels.push('product/apim');
+               product = product + `APIM`;
             } else if (labels.some(label => label.name === 'product/ei')){
                issueData.labels.push('product/ei');
             }
+            const issueBody = `This Patch Internal was automatically created to track forward porting of ${issue_title}.
+                Original issue: #${number}
+                Product: ${product}`;
             
             await github.rest.issues.create({
                 owner,
